@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
-  res.send("youhouou");
+  res.send("youhou");
 });
 
 app.use('/auth', authRouter);

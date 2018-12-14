@@ -3,6 +3,6 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'jecode4wcs',
-  database : 'my_db'
+  database : 'homer'
 });
 module.exports  =  connection;
