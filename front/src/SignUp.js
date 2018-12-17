@@ -1,55 +1,90 @@
 import React, { Component } from "react";
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      passwordbis: "",
+      name: "",
+      lastname: "",
+      flash: ""
+    };
+    this.updateField = this.updateField.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  updateField = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleSubmit = () => {
+    fetch("/auth/signup", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(
+        res => this.setState({ flash: res.flash }),
+        err => this.setState({ flash: err.flash })
+      );
+  };
+
   render() {
-    const { updateField, state, handleSubmit } = { ...this.props };
+    const myJSON = JSON.stringify(this.state);
     return (
-      <div>
-        <h1>{JSON.stringify(state, 1, 1)}</h1>
-        <form onSubmit={event => handleSubmit(event)}>
-          <p>
-            <input
-              onChange={event => updateField(event)}
-              type="email"
-              name="email"
-              placeholder="Votre email"
-            />
-          </p>
-          <p>
-            <input
-              onChange={event => updateField(event)}
-              type="password"
-              name="password"
-              placeholder="Votre mot de passe"
-            />
-          </p>
-          <p>
-            <input
-              onChange={event => updateField(event)}
-              type="password"
-              name="passwordbis"
-              placeholder="Retappez votre mot de passe"
-            />
-          </p>
-          <p>
-            <input
-              onChange={event => updateField(event)}
-              type="text"
-              name="name"
-              placeholder="Votre Nom"
-            />
-          </p>
-          <p>
-            <input
-              onChange={event => updateField(event)}
-              type="text"
-              name="firstname"
-              placeholder="Votre prénom"
-            />
-          </p>
-          <input type="submit" value="Soumettre" />
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <br />
+        <br />
+
+        <input
+          onChange={this.updateField}
+          type="email"
+          name="email"
+          placeholder="enter your email"
+        />
+        <br />
+        <br />
+        <input
+          onChange={this.updateField}
+          type="password"
+          name="password"
+          placeholder="enter your password"
+        />
+        <br />
+        <br />
+        <input
+          onChange={this.updateField}
+          type="password"
+          name="passwordbis"
+          placeholder="enter your password again"
+        />
+        <br />
+        <br />
+        <input
+          onChange={this.updateField}
+          type="text"
+          name="name"
+          placeholder="enter your first name"
+        />
+        <br />
+        <br />
+        <input
+          onChange={this.updateField}
+          type="text"
+          name="lastname"
+          placeholder="enter your last name"
+        />
+        <br />
+        <br />
+        <input type="submit" value="Soumettre" />
+      </form>
     );
   }
 }
