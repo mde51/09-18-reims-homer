@@ -9,42 +9,27 @@ import SignUp from "./SignUp";
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <Grid
-          container
-          alignItems="center"
-          justify="center"
-          style={{ height: "100%" }}
-        >
-          <Grid item xs={12} sm={6}>
-            <Paper elevation={6} style={{ margin: 32 }}>
-              <Grid
-                container
-                alignItems="center"
-                alignContent="center"
-                justify="center"
-              >
-                <Grid item xs={12} sm={6} style={{ textAlign: "center" }}>
-                  <img
-                    src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"
-                    alt="homer"
-                  />
+      <div className="App">
+        <MuiThemeProvider>
+          <Grid container alignItems="center" style={{ height: "100%" }}>
+            <Grid item xs={12}>
+              <Paper elevation={4} style={{ margin: 32 }}>
+                <Grid container alignItems="center" justify="center">
+                  <Grid item xs={12} sm={6} style={{ textAlign: "center" }}>
+                    <img
+                      src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"
+                      alt="homer"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                  <SignUp />
+                  </Grid>
                 </Grid>
-
-                <Grid
-                  container
-                  item
-                  xs={12}
-                  sm={6}
-                  justify="center"
-                  style={{ textAlign: "center" }}
-                />
-                <SignUp />
-              </Grid>
-            </Paper>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }
