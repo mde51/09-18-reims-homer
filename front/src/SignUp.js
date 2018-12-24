@@ -10,7 +10,8 @@ class SignUp extends Component {
       passwordbis: "monPassw0rd",
       name: "James",
       lastname: "Bond",
-      flash: ""
+      flash: "",
+      open:false
     };
     this.updateEmailField = this.updateEmailField.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
