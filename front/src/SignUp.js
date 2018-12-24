@@ -122,6 +122,16 @@ class SignUp extends Component {
             message="Vous êtes inscrit !!"
             autoHideDuration={4000}
             onRequestClose={this.handleRequestClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={
+              <span id="message-id">
+                {this.state.flash === "User has been signed in !"
+                  ? this.state.flash
+                  : "Une erreur est survenue ..."}
+              </span>
+            }
           />
         </form>
       </div>

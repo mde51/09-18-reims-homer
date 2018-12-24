@@ -107,10 +107,24 @@ class SignIn extends Component {
             Si vous n'avez pas de compte, inscrivez vous ici !!
           </Link>
           <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center"
+            }}
             open={this.state.open}
             message="Vous êtes identifié !!"
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={
+              <span id="message-id">
+                {this.state.flash === "User has been signed in !"
+                  ? this.state.flash
+                  : "An error occurred..."}
+              </span>
+            }
           />
         </form>
       </div>
