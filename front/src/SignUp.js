@@ -125,13 +125,7 @@ class SignUp extends Component {
             ContentProps={{
               "aria-describedby": "message-id"
             }}
-            message={
-              <span id="message-id">
-                {this.state.flash === "User has been signed in !"
-                  ? this.state.flash
-                  : "Une erreur est survenue ..."}
-              </span>
-            }
+            message={<span id="message-id">{this.state.flash}</span>}
           />
         </form>
       </div>

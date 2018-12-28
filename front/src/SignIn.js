@@ -120,9 +120,9 @@ class SignIn extends Component {
             }}
             message={
               <span id="message-id">
-                {this.state.flash === "User has been signed in !"
+                {this.state.flash === "L'utilisateur a été connecté !"
                   ? this.state.flash
-                  : "An error occurred..."}
+                  : "Une erreur est survenue ..."}
               </span>
             }
           />
