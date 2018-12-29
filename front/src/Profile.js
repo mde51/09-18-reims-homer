@@ -1,70 +1,50 @@
-import React, { Component } from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import React, { Component, Fragment } from "react";
+import { List, ListItem, ListItemText, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import StarIcon from "@material-ui/icons/Star";
-
-const styles = theme => ({
-  root: {
-    width: "100%",
-    maxWitdh: 360,
-    margin: "auto"
-  }
-});
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       profile: {
         email: "homer.simpson@wildcodeschool.fr",
-        firstname: "Homer",
+        name: "Homer",
         lastname: "Simpson"
       }
     };
   }
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>
-        <List component="nav" className={classes.root}>
+      <Fragment>
+        <List>
           <ListItem>
             <ListItemText
-              primary="email"
+              primary="Email"
               secondary={this.state.profile.email}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="prénom"
-              secondary={this.state.profile.firstname}
+              primary="Name"
+              secondary={this.state.profile.name}
             />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary="nom"
+              primary="Lastname"
               secondary={this.state.profile.lastname}
             />
           </ListItem>
         </List>
-        <Link to="/signin">
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            value="Déconnexion"
-          >
-            Déconnexion
+        <Link to="/Signin">
+          <Button variant="contained" color="secondary">
+            Se déconnecter
           </Button>
         </Link>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default withStyles(styles)(Profile);
+export default Profile;

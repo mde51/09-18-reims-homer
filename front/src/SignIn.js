@@ -1,133 +1,112 @@
+import React, { Component, Fragment } from "react";
+import { TextField, Snackbar, Button, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
-import React, { Component } from "react";
-import { TextField, Button, Snackbar } from "@material-ui/core";
+
+import "./App.css";
 
 class SignIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      email: "mon@email.com",
-      password: "monPassw0rd",
-      flash: "",
-      open: false
+      open: false,
+      email: "Homer@wild.com",
+      password: "odyssey",
+      flash: ""
     };
-    this.updateEmailField = this.updateEmailField.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
-    this.updatePasswordbis = this.updatePasswordbis.bind(this);
-    this.updateName = this.updateName.bind(this);
-    this.updateLastname = this.updateLastname.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
-
-  updateEmailField(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  updatePassword(event) {
-    this.setState({ password: event.target.value });
-  }
-
-  updatePasswordbis(event) {
-    this.setState({ passwordbis: event.target.value });
-  }
-
-  updateName(event) {
-    this.setState({ name: event.target.value });
-  }
-
-  updateLastname(event) {
-    this.setState({ lastname: event.target.value });
-  }
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    fetch("/auth/signin", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(
+        res => this.setState({ flash: res.flash }),
+        err => this.setState({ flash: err.flash })
+      );
+  };
 
   handleClick = () => {
-    this.setState({
-      open: true
-    });
+    this.setState({ open: true });
   };
 
   handleRequestClose = () => {
     this.setState({
       open: false
     });
-  };
+};
 
-  handleSubmit(event) {
-    console.log("A name was submitted: " + JSON.stringify(this.state, 1, 1));
-    fetch("/auth/signin", {
-      method: "POST",
-      headers: new Headers({
-        "Content-Type": "application/json"
-      }),
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        name: this.state.name,
-        lastname: this.state.lastname
-      })
-    })
-      .then(res => res.json())
-      .then(
-        res => this.setState({ flash: res.flash, open: true }),
-        err => this.setState({ flash: err.flash, open: true })
-      );
-    event.preventDefault();
-  }
+    
+  
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <h4>E-mail</h4>
+      <Fragment>
+        <form onSubmit={event => this.handleSubmit(event)}>
           <TextField
-            onChange={this.updateEmailField}
+            label="Email"
+            onChange={event => this.handleInputChange(event)}
             type="email"
             name="email"
           />
-          <h4>Password</h4>
           <TextField
-            onChange={this.updatePassword}
+            label="Password"
+            onChange={event => this.handleInputChange(event)}
             type="password"
             name="password"
           />
           <br />
           <br />
-          <Link to="/profile">
-            <Button
-              color="primary"
-              variant="contained"
-              type="submit"
-              value="Soumettre"
-              onClick={this.handleClick}
-            >
-              Valider
-            </Button>
-          </Link>
+          <Button
+            color="primary"
+            variant="contained"
+            type="submit"
+            value="Soumettre"
+            onClick={this.handleClick}
+          >
+            Valider
+          </Button>
           <br />
           <br />
-          <Link to="/signUp">
+          <Link to="/signup">
             Si vous n'avez pas de compte, inscrivez vous ici !!
           </Link>
-          <Snackbar
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center"
-            }}
-            open={this.state.open}
-            message="Vous êtes identifié !!"
-            autoHideDuration={4000}
-            onClose={this.handleClose}
-            ContentProps={{
-              "aria-describedby": "message-id"
-            }}
-            message={
-              <span id="message-id">
-                {this.state.flash === "L'utilisateur a été connecté !"
-                  ? this.state.flash
-                  : "Une erreur est survenue ..."}
-              </span>
-            }
-          />
         </form>
-      </div>
+
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          open={this.state.open}
+          message="Vous êtes inscrit !!"
+          autoHideDuration={4000}
+          onClose={this.handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{this.state.flash}</span>}
+          action={[
+            
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
+      </Fragment>
     );
   }
 }
