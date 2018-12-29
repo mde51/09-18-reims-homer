@@ -44,7 +44,7 @@ class SignUp extends Component {
     });
   };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({
       open: false
     });
@@ -87,8 +87,7 @@ class SignUp extends Component {
             type="password"
             name="password"
           />
-          <h4>Repeat password</h4>
-
+          
           <h4>Name</h4>
           <TextField onChange={this.updateName} type="text" name="name" />
           <h4>Lastname</h4>
@@ -117,7 +116,7 @@ class SignUp extends Component {
             open={this.state.open}
             message="Vous êtes inscrit !!"
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+            onRequestClose={this.handleClose}
             ContentProps={{
               "aria-describedby": "message-id"
             }}

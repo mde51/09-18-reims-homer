@@ -39,7 +39,7 @@ class SignIn extends Component {
     this.setState({ open: true });
   };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({
       open: false
     });
