@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TextField, Button, Snackbar, IconButton } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
   constructor() {
@@ -87,7 +86,7 @@ class SignUp extends Component {
             type="password"
             name="password"
           />
-          
+
           <h4>Name</h4>
           <TextField onChange={this.updateName} type="text" name="name" />
           <h4>Lastname</h4>
@@ -110,7 +109,7 @@ class SignUp extends Component {
           </Button>
           <br />
           <br />
-          <Link to="/signin">Retour Acceuil</Link>
+          <Link  to="/signin">Retour Acceuil</Link>
 
           <Snackbar
             open={this.state.open}
@@ -122,17 +121,14 @@ class SignUp extends Component {
             }}
             message={<span id="message-id">{this.state.flash}</span>}
             action={[
-            
               <IconButton
                 key="close"
                 aria-label="Close"
                 color="inherit"
                 onClick={this.handleClose}
-              >
-                <CloseIcon />
-              </IconButton>
+              />
             ]}
-            />
+          />
         </form>
       </div>
     );

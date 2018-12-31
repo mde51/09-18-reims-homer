@@ -1,9 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 import { TextField, Snackbar, Button, IconButton } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
-
-import "./App.css";
 
 class SignIn extends Component {
   constructor(props) {
@@ -43,13 +40,11 @@ class SignIn extends Component {
     this.setState({
       open: false
     });
-};
+  };
 
-    
-  
   render() {
     return (
-      <Fragment>
+      <div>
         <form onSubmit={event => this.handleSubmit(event)}>
           <TextField
             label="Email"
@@ -66,7 +61,7 @@ class SignIn extends Component {
           <br />
           <br />
           <Button
-            color="primary"
+            color="secondary"
             variant="contained"
             type="submit"
             value="Soumettre"
@@ -79,34 +74,27 @@ class SignIn extends Component {
           <Link to="/signup">
             Si vous n'avez pas de compte, inscrivez vous ici !!
           </Link>
-        </form>
 
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center"
-          }}
-          open={this.state.open}
-          message="Vous êtes inscrit !!"
-          autoHideDuration={4000}
-          onClose={this.handleClose}
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          message={<span id="message-id">{this.state.flash}</span>}
-          action={[
-            
-            <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              onClick={this.handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Fragment>
+          <Snackbar
+            open={this.state.open}
+            message="Vous êtes inscrit !!"
+            autoHideDuration={4000}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">{this.state.flash}</span>}
+            action={[
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                onClick={this.handleClose}
+              />
+            ]}
+          />
+        </form>
+      </div>
     );
   }
 }
