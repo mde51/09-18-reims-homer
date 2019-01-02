@@ -1,30 +1,53 @@
 import React, { Component } from "react";
+import { TextField, Button, Snackbar, IconButton } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: "mon@email.com",
       password: "monPassw0rd",
       passwordbis: "monPassw0rd",
       name: "James",
       lastname: "Bond",
-      flash: ""
+      flash: "",
+      open: false
     };
+    this.updateEmailField = this.updateEmailField.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
+    this.updateName = this.updateName.bind(this);
+    this.updateLastname = this.updateLastname.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  updateEmail(event) {
+
+  updateEmailField(event) {
     this.setState({ email: event.target.value });
   }
+
   updatePassword(event) {
     this.setState({ password: event.target.value });
   }
+
   updateName(event) {
     this.setState({ name: event.target.value });
   }
+
   updateLastname(event) {
     this.setState({ lastname: event.target.value });
   }
+
+  handleClick = () => {
+    this.setState({
+      open: true
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    });
+  };
 
   handleSubmit(event) {
     console.log("A name was submitted: " + JSON.stringify(this.state, 1, 1));
@@ -42,55 +65,38 @@ class SignUp extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => this.setState({ flash: res.flash, open: true }),
+        err => this.setState({ flash: err.flash, open: true })
       );
-
     event.preventDefault();
   }
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          {/* <h1>{JSON.stringify(this.state, 1, 1)}</h1> */}
-          <h3>E-mail</h3>
-          <input
-            onChange={this.updateEmail.bind(this)}
+          <h4>E-mail</h4>
+          <TextField
+            onChange={this.updateEmailField}
             type="email"
             name="email"
           />
-
-          <h3>Password</h3>
-          <input
-            onChange={this.updatePassword.bind(this)}
+          <h4>Password</h4>
+          <TextField
+            onChange={this.updatePassword}
             type="password"
             name="password"
           />
 
-          <h3>Name</h3>
-          <input
-            onChange={this.updateName.bind(this)}
-            type="text"
-            name="name"
-          />
-
-          <h3>LastName</h3>
-          <input
-            onChange={this.updateLastname.bind(this)}
+          <h4>Name</h4>
+          <TextField onChange={this.updateName} type="text" name="name" />
+          <h4>Lastname</h4>
+          <TextField
+            onChange={this.updateLastname}
             type="text"
             name="lastname"
           />
           <br />
           <br />
-<<<<<<< HEAD
-          <form
-            method="POST"
-            enctype="multipart/form-data"
-            action="uploaddufichier"
-          >
-            <input type="file" name="monfichier" accept="image/png" multiple />
-            <button> envoyer </button>
-          </form>
           <Button
             color="primary"
             variant="contained"
@@ -100,9 +106,9 @@ class SignUp extends Component {
           >
             Valider
           </Button>
+          <input type="submit" value="Valider" />
           <br />
-          <br />
-          <Link to="/signin">Retour Acceuil</Link>
+          <Link  to="/signin">Retour Acceuil</Link>
 
           <Snackbar
             open={this.state.open}
@@ -122,12 +128,7 @@ class SignUp extends Component {
               />
             ]}
           />
-=======
-          <input type="submit" value="Valider" />
-          <br />
->>>>>>> 9877caac5994d22753c32c46ec72bbb757d0625c
         </form>
-        <br />
       </div>
     );
   }
