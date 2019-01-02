@@ -97,7 +97,14 @@ class SignUp extends Component {
           />
           <br />
           <br />
-
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            action="uploaddufichier"
+          >
+            <input type="file" name="monfichier" accept="image/png" multiple />
+            <button> envoyer </button>
+          </form>
           <Button
             color="primary"
             variant="contained"
@@ -109,7 +116,7 @@ class SignUp extends Component {
           </Button>
           <br />
           <br />
-          <Link  to="/signin">Retour Acceuil</Link>
+          <Link to="/signin">Retour Acceuil</Link>
 
           <Snackbar
             open={this.state.open}
